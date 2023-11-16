@@ -1,4 +1,4 @@
-export enum Markets {
+enum Markets {
   CoinMarketCap = 1,
   CoinBase,
   CoinStats,
@@ -8,5 +8,4 @@ export enum Markets {
 
 let markets: string[] = Object.keys(Markets).filter((key) => isNaN(Number(key)));
 markets = markets.map((market) => market.toLowerCase());
-
-export { markets };
+export { markets, Markets };

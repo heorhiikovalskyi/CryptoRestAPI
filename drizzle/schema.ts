@@ -9,41 +9,41 @@ import {
   foreignKey,
   float,
   datetime,
-} from "drizzle-orm/mysql-core";
-import { sql } from "drizzle-orm";
+} from 'drizzle-orm/mysql-core';
+import { sql } from 'drizzle-orm';
 
 export const cryptocurrency = mysqlTable(
-  "cryptocurrency",
+  'cryptocurrency',
   {
-    id: int("id").autoincrement().primaryKey().notNull(),
-    symbol: varchar("symbol", { length: 255 }).notNull(),
-    name: varchar("name", { length: 255 }).notNull(),
+    id: int('id').autoincrement().primaryKey().notNull(),
+    symbol: varchar('symbol', { length: 255 }).notNull(),
+    name: varchar('name', { length: 255 }).notNull(),
   },
   (table) => {
     return {
-      symbol: uniqueIndex("symbol").on(table.symbol),
+      symbol: uniqueIndex('symbol').on(table.symbol),
     };
   }
 );
 
 export const exchangerate = mysqlTable(
-  "exchangerate",
+  'exchangerate',
   {
-    id: int("id").autoincrement().primaryKey().notNull(),
-    market: int("market").references(() => market.id, { onDelete: "set null" }),
-    cryptocurrency: int("cryptocurrency").references(() => cryptocurrency.id, { onDelete: "set null" }),
-    conversiontoUsd: float("conversiontoUSD").notNull(),
-    date: datetime("date", { mode: "string" }).notNull(),
+    id: int('id').autoincrement().primaryKey().notNull(),
+    market: int('market').references(() => market.id, { onDelete: 'set null' }),
+    cryptocurrency: int('cryptocurrency').references(() => cryptocurrency.id, { onDelete: 'set null' }),
+    conversiontoUsd: float('conversiontoUSD').notNull(),
+    date: datetime('date', { mode: 'string' }).notNull(),
   },
   (table) => {
     return {
-      market: index("market").on(table.market),
-      cryptocurrency: index("cryptocurrency").on(table.cryptocurrency),
+      market: index('market').on(table.market),
+      cryptocurrency: index('cryptocurrency').on(table.cryptocurrency),
     };
   }
 );
 
-export const market = mysqlTable("market", {
-  id: int("id").autoincrement().primaryKey().notNull(),
-  name: varchar("name", { length: 255 }).notNull(),
+export const market = mysqlTable('market', {
+  id: int('id').autoincrement().primaryKey().notNull(),
+  name: varchar('name', { length: 255 }).notNull(),
 });

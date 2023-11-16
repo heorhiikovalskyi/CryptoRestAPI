@@ -1,5 +1,5 @@
-import type { Config } from "drizzle-kit";
-import "dotenv/config.js";
+import type { Config } from 'drizzle-kit';
+import 'dotenv/config';
 
 const { SQL_PASSWORD, SQL_USER, SQL_HOST, DB } = process.env;
 

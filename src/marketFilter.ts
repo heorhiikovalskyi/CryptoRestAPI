@@ -1,12 +1,14 @@
-import "dotenv/config.js";
-import { FilterService } from "./services/filterService.js";
+import 'dotenv/config';
+import { FilterService } from './services/Filter';
+import HelperService from './services/Helper';
+
 const { COIN_MARKET_CAP_API_KEY } = process.env;
 
-const filterService = FilterService.getInstance();
+const filterService = new FilterService(new HelperService());
 
 export const marketFilter = [
   {
-    url: "http://api.coinstats.app/public/v1/coins?currency=USD",
+    url: 'http://api.coinstats.app/public/v1/coins?currency=USD',
     filter: filterService.filterCointStats,
   },
   {
@@ -14,15 +16,15 @@ export const marketFilter = [
     filter: filterService.filterCoinMarketCap,
   },
   {
-    url: "http://api.coinbase.com/v2/exchange-rates",
+    url: 'http://api.coinbase.com/v2/exchange-rates',
     filter: filterService.filterCoinBase,
   },
   {
-    url: "http://api.kucoin.com./api/v1/prices",
+    url: 'http://api.kucoin.com./api/v1/prices',
     filter: filterService.filterKucoin,
   },
   {
-    url: "http://api.coinpaprika.com/v1/tickers",
+    url: 'http://api.coinpaprika.com/v1/tickers',
     filter: filterService.filterCoinPaprika,
   },
 ];

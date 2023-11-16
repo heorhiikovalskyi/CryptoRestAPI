@@ -1,21 +1,23 @@
 {
-  "type": "module",
   "dependencies": {
     "axios": "^1.3.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "drizzle-orm": "^0.26.1",
+    "esbuild": "^0.19.5",
     "express": "^4.18.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.3.3",
     "node-cron": "^3.0.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.16",
     "@types/express": "^4.17.17",
     "@types/mysql": "^2.15.21",
     "@types/node-cron": "^3.0.7",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "drizzle-kit": "^0.18.1",
-    "eslint": "^8.34.0",
+    "eslint": "^8.53.0",
     "eslint-config-standard-with-typescript": "^34.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
@@ -23,6 +25,13 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "start": "ts-node-esm ./src/server.ts"
+    "start": "npm run build && npm run server",
+    "generate": "drizzle-kit generate:mysql",
+    "eslint": "eslint ./src",
+    "eslint:fix": "npx eslint --fix src/**",
+    "build": "esbuild src/server.ts --platform=node --target=node16 --format=cjs --bundle --minify --main-fields=main --outfile=dist/server.js",
+    "dev": "nodemon src/server.ts",
+    "server": "node dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
